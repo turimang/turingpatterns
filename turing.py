@@ -62,12 +62,9 @@ def solve_turing():
 
     u = getsols()
     out.append([u])
-    print(len(out))
     return u, x, out
 
 
-
-#
 u, x, out = solve_turing()
 
 x_anal = np.linspace(-15, 15, 10)
@@ -78,8 +75,8 @@ u_analend = Analytical_Solution_Special(alpha, x_anal, 4)
 
 plt.figure()
 plt.plot(x, out[0][0], label='Numerical t=0', color='blue')
-plt.plot(x, out[3360][0], label='Numerical t=2', color='green')
-plt.plot(x, out[6720][0], label='Numerical t=4', color='red')
+plt.plot(x, out[int(len(out)/Tf)*2][0], label='Numerical t=2', color='green')
+plt.plot(x, out[int(len(out)/Tf)*4][0], label='Numerical t=4', color='red')
 plt.scatter(x_anal, u_analstart, label='Analytical t=0', color='blue')
 plt.scatter(x_anal, u_analhalf, label='Analytical t=2', color='green')
 plt.scatter(x_anal, u_analend, label='Analytical t=4', color='red')
