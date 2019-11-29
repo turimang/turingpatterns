@@ -111,37 +111,3 @@ plt.plot(x, error4, label='Error t=4', color='red')
 plt.xlabel('x')
 plt.ylabel('Error')
 plt.show()
-
-
-# eps = 1.0
-# h = 0.05
-# start = 0+h
-# end = 20-h
-# N = (end - start)/h
-# alpha: int = 3
-# k = 0.4 * h**2 / eps
-# Tf = 42.0
-# x = np.arange(0+h, 20-h, h)
-#
-#
-# L = construct_laplace_matrix_1d(N, h)
-# bc = np.concatenate(([1], np.zeros(N-1)))/h**2
-#
-# u = (x<3).astype('float64')
-#
-# fig, ax = plt.subplots()
-# ln, = plt.plot(x, u)
-# ax.set_ylim(0, 1.1)
-#
-# u_data = [None]
-#
-# for i in range(N):
-#     u_data.append(u + k * (eps * (L * u + bc) + (u - u ** alpha)))
-#
-# t = np.linspace(0, Tf, N)
-# X, T = np.meshgrid(x, t)
-#
-# print(len(u_data))
-# fig = plt.figure()
-# ax = plt.axes(projection='3d')
-# ax.contour3D(X, T, u_data, 50)
