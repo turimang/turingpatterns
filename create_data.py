@@ -2,7 +2,7 @@ import os
 import numpy as np
 from plot_data import plot
 
-lst = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
+lst = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0]
 
 def add_noise(i):
     data = np.load(os.path.join('data', str(i) + '.npy'))
