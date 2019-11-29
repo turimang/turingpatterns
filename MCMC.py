@@ -71,21 +71,21 @@ class decision:
             results.b_data.append(accepted_guess.b)
         return accepted_guess
 
-def main():
+def MCMC_main(a_init, b_init, a_max, b_max, iters):
     time = 1.0
     target = np.load(os.path.join('noisy_data', str(time) + '.npy'))
     dec = decision()
-    accepted_a, accepted_b = 3e-4, 5e-3 #initial guesses
+    accepted_a, accepted_b = a_init, b_init #initial guesses
     accepted_guess = guess(accepted_a, accepted_b, time, target)
 
     results = result_dist()
     prop = proposal_dist()
     guess_number = 1
 
-    while guess_number < 1000:
+    while guess_number < iters:
         next_a = accepted_guess.a + random.choice(prop.x)
         next_b = accepted_guess.b + random.choice(prop.y)
-        if 0.0 < next_a < 1e-3 and 0 < next_b < 1e-2:
+        if 0.0 < next_a < a_max and 0 < next_b < b_max:
             next_guess = guess(next_a, next_b, time, target)
             accepted_guess = dec.accept_or_reject_1(accepted_guess, next_guess, results, guess_number)
             print(guess_number, next_guess.a, accepted_guess.a, next_guess.b, accepted_guess.b)
@@ -93,11 +93,15 @@ def main():
     return results, accepted_guess
 
 
-res, final_guess = main()
-json.dump(res.a_data, open(os.path.join('MCMCresults', 'a_values.json'), 'w'))
-json.dump(res.b_data, open(os.path.join('MCMCresults', 'b_values.json'), 'w'))
+def MCMC_save_plot(res):
+    json.dump(res.a_data, open(os.path.join('MCMCresults', 'a_values.json'), 'w'))
+    json.dump(res.b_data, open(os.path.join('MCMCresults', 'b_values.json'), 'w'))
 
-plt.hist(res.a_data, range=(0, 1e-3))
-plt.show()
-plt.hist(res.b_data, range=(0, 1e-2))
-plt.show()
+    plt.hist(res.a_data, range=(0, 1e-3))
+    plt.show()
+    plt.hist(res.b_data, range=(0, 1e-2))
+    plt.show()
+
+# res, final_guess = MCMC_main(a_init=3e-4, b_init=5e-3, a_max=1e-3, b_max=1e-2, 1000)
+# MCMC_save_plot(res)
+

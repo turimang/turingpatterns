@@ -62,6 +62,5 @@ def turing_pattern(a=2.8e-4, b=5e-3, tau=2, k=0):
             np.save(os.path.join('data', str(i/step_plot)), U)
     plt.show()
 
-turing_pattern()
 
 

@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import json
 import os
-import numpy as np
-from statistics import mode
 
 a = json.load(open(os.path.join('MCMCresults', 'a_values.json')))
 b = json.load(open(os.path.join('MCMCresults','b_values.json')))
