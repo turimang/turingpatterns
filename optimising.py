@@ -1,4 +1,4 @@
-from turing import turing
+from turing_anna import turing
 from plot_data import plot
 from calculate_error import calc_error
 import numpy as np
