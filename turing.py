@@ -7,16 +7,13 @@ import matplotlib.pyplot as plt
 
 def Analytical_Solution_Special(alpha, x, t):
     """
-
+    Function that generates the analytical solution for the specialised Fischer Equation
     :param alpha: Exponent in the specialised Fischer equation
     :param x: x space
     :param t: time
-    :return: Analytical solution of the specialised Fischer equation
+    :return: Analytical solution of the specialised Fischer equation with respect to x at time t.
     """
     return (-(1/2)*np.tanh(alpha/(2*(2*alpha + 4)**(1/2))*(x - ((alpha+4)*t)/((2*alpha + 4)**(1/2)))) + 1/2)**(2/alpha)
-    # constant1 = alpha/(2.0*np.sqrt(2.0*alpha+4.0))
-    # constant2 = (alpha+4.0)/(np.sqrt(2.0*alpha+4.0))
-    # return (-1.0*np.tanh(constant1*(x-constant2*t)+0.5))**(2.0/alpha)
 
 
 def construct_laplace_matrix_1d(N, h):
@@ -42,24 +39,27 @@ x = np.arange(-15, 15, h)
 
 
 def solve_turing():
-    eps = 1.0
-    h = 0.05
-    alpha = 3.0
-    k = 0.2 * h**2 / eps
-    Tf = 42.0
-    x = np.arange(-15, 15, h)
+    """
+    Solves the specialised Fischer Equation given the default parameters
+    :return:
+    """
+    eps = 1.0   # Multiplier unique to specific biological systems
+    h = 0.05    # Spacial step
+    alpha = 3.0 # Exponent
+    k = 0.2 * h**2 / eps    # Time step
+    Tf = 42.0   # Total time
+    x = np.arange(-15, 15, h)   # X space
 
     N = len(x)
-    L = construct_laplace_matrix_1d(N, h)
-    bc = np.concatenate(([1], np.zeros(N-1)))/h**2
-    out = []
-    u = Analytical_Solution_Special(alpha, x, 0)
-
-    fig, ax = plt.subplots()
-    ax.set_ylim(0, 1.1)
-
+    L = construct_laplace_matrix_1d(N, h)   # Construct Laplace matrix
+    bc = np.concatenate(([1], np.zeros(N-1)))/h**2  # Application of Neumann boundary conditions
+    out = []    # Initialise output
+    u = Analytical_Solution_Special(alpha, x, 0)    # Apply initial condition at t=0
 
     def getsols():
+        """
+        :return: Generates an array of numerical solutions to the specialised Fischer equation
+        """
         for i in range(int(Tf/k)):
             u_new = u + k*(eps*(L*u + bc) + u*(1-u**alpha))
             out.append([u_new])
@@ -72,12 +72,11 @@ def solve_turing():
 
 
 u, x, out = solve_turing()
+x_anal = np.linspace(-15, 15, 10)   # Define x-space for scatter plot of analytical solution
 
-x_anal = np.linspace(-15, 15, 10)
-
-u_analstart = Analytical_Solution_Special(alpha, x_anal, 0)
-u_analhalf = Analytical_Solution_Special(alpha, x_anal, 2)
-u_analend = Analytical_Solution_Special(alpha, x_anal, 4)
+u_analstart = Analytical_Solution_Special(alpha, x_anal, 0)     # Analytical solution at t=0
+u_analhalf = Analytical_Solution_Special(alpha, x_anal, 2)      # Analytical solution at t=2
+u_analend = Analytical_Solution_Special(alpha, x_anal, 4)       # Analytical solution at t=4
 
 #plt.figure()
 plt.plot(x, out[0][0], label='Numerical t=0', color='blue')
@@ -91,11 +90,12 @@ plt.ylabel('Solution')
 plt.legend()
 plt.show()
 
-
+# Generate analytical solutions at more values of x for error analysis
 u_anal0_error = Analytical_Solution_Special(alpha, x, 0)
 u_anal2_error = Analytical_Solution_Special(alpha, x, 2)
 u_anal4_error = Analytical_Solution_Special(alpha, x, 4)
 
+# initialise arrays
 error0 = []
 error2 = []
 error4 = []
@@ -105,19 +105,12 @@ for i in range(len(x)):
     error2.append((u_anal2_error[i] - out[int(len(out)/Tf)*2][0][i])**2)
     error4.append((u_anal4_error[i] - out[int(len(out)/Tf)*4][0][i])**2)
 
-#plt.figure()
 plt.plot(x, error0, label='Error t=0', color='blue')
 plt.plot(x, error2, label='Error t=2', color='green')
 plt.plot(x, error4, label='Error t=4', color='red')
 plt.xlabel('x')
 plt.ylabel('Error')
 plt.show()
-
-
-
-
-
-
 
 
 # eps = 1.0
