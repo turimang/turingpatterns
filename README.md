@@ -121,7 +121,7 @@ In this case we are interested in the case where τ is very big and k=0. This wi
 In other words, the inhibitor is no longer effective and the melanin is produced in all the domain instead of specific points. This can occur due to a nonsense mutation that causes the gene responsible for the inhibition to malfuction or in extreme cases stop working all together e.g. a protein is not produced at all. Usually, a heterozygous individual with a heatly variation of the genes won't exhibit any alterations to its phenotype, although hetorozygous parants can produce offsprings with both the normal and black phenotype. This can be seen in the photo below, in which twin leopards with diffrent coat pigmentation.
 
 
-![Twin leopards with different pigmentation.](wjHIuCO.jpg)
+![Twin leopards with different pigmentation.](twin_leopards.jpg)
 
 ## Our Aim
 
