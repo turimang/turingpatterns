@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from turing import turing
+from turing_anna import turing
 from calculate_error import calc_error
 import os
 import matplotlib.pyplot as plt
@@ -102,6 +102,6 @@ def MCMC_save_plot(res):
     plt.hist(res.b_data, range=(0, 1e-2))
     plt.show()
 
-# res, final_guess = MCMC_main(a_init=3e-4, b_init=5e-3, a_max=1e-3, b_max=1e-2, 1000)
+# res, final_guess = MCMC_main(a_init=3e-4, b_init=5e-3, a_max=1e-3, b_max=1e-2, iters=10)
 # MCMC_save_plot(res)
 

@@ -13,4 +13,4 @@ def create_data(lst):
         noisy_data = add_noise(i)
         np.save(os.path.join('noisy_data', str(i)), noisy_data)
 
-create_data(lst)
+# create_data(lst)

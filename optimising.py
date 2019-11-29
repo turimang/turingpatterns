@@ -39,3 +39,4 @@ def optimise(time = 1.0, a_initial = 0.0, a_final = 1e-3, b_initial = 0.0, b_fin
     plot(data, time) # plotting the target data
     plot(final_result, time) # plotting the data that would be produced from the target data for comparison
     print(a_final, b_final, error)
+    return a_final, b_final

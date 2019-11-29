@@ -7,3 +7,6 @@ def create_initial_matrix(size):
 
     np.save(os.path.join('initialmatrices', 'U_initial'), U)
     np.save(os.path.join('initialmatrices', 'V_initial'), V)
+
+
+create_initial_matrix(100)
