@@ -86,7 +86,7 @@ plt.scatter(x_anal, u_analstart, label='Analytical t=0', color='blue')
 plt.scatter(x_anal, u_analhalf, label='Analytical t=2', color='green')
 plt.scatter(x_anal, u_analend, label='Analytical t=4', color='red')
 plt.xlabel('x')
-plt.ylabel('Solution')
+plt.ylabel('Signal')
 plt.legend()
 plt.show()
 
