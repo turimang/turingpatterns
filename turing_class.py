@@ -108,5 +108,5 @@ class NumericalSolver():
         plt.ylabel('Error')
         plt.show()
 
-a = NumericalSolver()
-a.plot_fig()
+# a = NumericalSolver()
+# a.plot_fig()
