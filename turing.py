@@ -6,6 +6,13 @@ import matplotlib.pyplot as plt
 
 
 def Analytical_Solution_Special(alpha, x, t):
+    """
+
+    :param alpha: Exponent in the specialised Fischer equation
+    :param x: x space
+    :param t: time
+    :return: Analytical solution of the specialised Fischer equation
+    """
     return (-(1/2)*np.tanh(alpha/(2*(2*alpha + 4)**(1/2))*(x - ((alpha+4)*t)/((2*alpha + 4)**(1/2)))) + 1/2)**(2/alpha)
     # constant1 = alpha/(2.0*np.sqrt(2.0*alpha+4.0))
     # constant2 = (alpha+4.0)/(np.sqrt(2.0*alpha+4.0))
@@ -27,7 +34,7 @@ def construct_laplace_matrix_1d(N, h):
 
 
 eps = 1.0
-h = 0.05
+h = 0.01
 alpha = 3.0
 k = 0.4 * h ** 2 / eps
 Tf = 50
@@ -57,7 +64,6 @@ def solve_turing():
             u_new = u + k*(eps*(L*u + bc) + u*(1-u**alpha))
             out.append([u_new])
             u[:] = u_new
-            u[0] = Analytical_Solution_Special(alpha, x, 0)[0]
         return u
 
     u = getsols()
@@ -73,7 +79,7 @@ u_analstart = Analytical_Solution_Special(alpha, x_anal, 0)
 u_analhalf = Analytical_Solution_Special(alpha, x_anal, 2)
 u_analend = Analytical_Solution_Special(alpha, x_anal, 4)
 
-plt.figure()
+#plt.figure()
 plt.plot(x, out[0][0], label='Numerical t=0', color='blue')
 plt.plot(x, out[int(len(out)/Tf)*2][0], label='Numerical t=2', color='green')
 plt.plot(x, out[int(len(out)/Tf)*4][0], label='Numerical t=4', color='red')
@@ -84,6 +90,29 @@ plt.xlabel('x')
 plt.ylabel('Solution')
 plt.legend()
 plt.show()
+
+
+u_anal0_error = Analytical_Solution_Special(alpha, x, 0)
+u_anal2_error = Analytical_Solution_Special(alpha, x, 2)
+u_anal4_error = Analytical_Solution_Special(alpha, x, 4)
+
+error0 = []
+error2 = []
+error4 = []
+
+for i in range(len(x)):
+    error0.append((u_anal0_error[i] - out[0][0][i])**2)
+    error2.append((u_anal2_error[i] - out[int(len(out)/Tf)*2][0][i])**2)
+    error4.append((u_anal4_error[i] - out[int(len(out)/Tf)*4][0][i])**2)
+
+#plt.figure()
+plt.plot(x, error0, label='Error t=0', color='blue')
+plt.plot(x, error2, label='Error t=2', color='green')
+plt.plot(x, error4, label='Error t=4', color='red')
+plt.xlabel('x')
+plt.ylabel('Error')
+plt.show()
+
 
 
 
