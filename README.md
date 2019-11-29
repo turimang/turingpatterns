@@ -125,7 +125,7 @@ In other words, the inhibitor is no longer effective and the melanin is produced
 
 ## Our Aim
 
-We are aiming to create a PDE solver used to generate Turing equation. In particular we focused on:
+We attempted to create a PDE solver for the Turing equation. In particular we focused on:
 
 * Testing a numerical solution of the Fisher reaction diffusion equation using the Finite Differences (FD) method and comparing it to the analytical solution using the Neumann boundary condition.
 * Ploting the error between the numerical and analytical solution.
